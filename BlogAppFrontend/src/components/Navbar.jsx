@@ -1,8 +1,20 @@
 import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material';
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
+
 
 const Navbar = () => {
+
+
+  const navigate = useNavigate()
+
+  const handleLogout = () =>{
+    sessionStorage.removeItem('logintoken');
+    alert('Logged Out')
+    navigate('/')
+  }
+
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>
@@ -19,7 +31,7 @@ const Navbar = () => {
               <Button style={{ color: "white" }}>ADDBLOG</Button>
             </Link>
             <Link to={"/"}>
-              <Button style={{ color: "white" }}>LOGOUT</Button>
+              <Button style={{ color: "white" }} onClick={handleLogout}>LOGOUT</Button>
             </Link>
           </Toolbar>
         </AppBar>

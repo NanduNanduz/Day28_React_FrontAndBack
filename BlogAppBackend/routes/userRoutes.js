@@ -19,7 +19,7 @@ router.post('/login', async(req,res)=>{
         try {
             if (user.userPassword == req.body.userPassword) {
               // generating token when the pass and email is matched
-              // blogApp - key (use any key )
+              // blogApp - secret key (use any key )
               // payload is the email and password
               const payload = {
                 userEmail: user.userEmail,
@@ -29,6 +29,7 @@ router.post('/login', async(req,res)=>{
 
               //that fetched user password is checked with the given pass
               //sending this token to the frontend
+              //store that front end in the session storage
               res.status(200).send({ message: "Login Successful",token:token });
             }          
         } catch (error) {

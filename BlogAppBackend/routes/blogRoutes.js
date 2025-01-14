@@ -21,7 +21,7 @@ function verifytoken(req,res,next){
             let payload =jwt.verify(token,'blogApp');
             if(!payload) throw 'Unauthorized access';
             next();
-            //if there is no issue s in varify token then move on to next issues
+            //if there is no issue s in varify token then move on to next req
         }
         
     } catch (error) {
@@ -71,18 +71,16 @@ router.put('/editblog/:id',verifytoken, async(req, res)=>{
 })
 
 //delete
-router.delete('/deleteblog/:id', async(req, res)=>{
-    try {
-        const data = await blogModel.findByIdAndDelete(req.params.id)
-        if(data){
-        
-            res.status(200).send('Delete Successful')
-        }
-    } catch (error) {
-        res.status(404).send('Delete Unsuccessful')
-        
+router.delete("/deleteblog/:id", verifytoken, async (req, res) => {
+  try {
+    const data = await blogModel.findByIdAndDelete(req.params.id);
+    if (data) {
+      res.status(200).send("Delete Successful");
     }
-})
+  } catch (error) {
+    res.status(404).send("Delete Unsuccessful");
+  }
+});
 
 
 module.exports = router;
