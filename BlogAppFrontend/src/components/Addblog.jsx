@@ -22,7 +22,8 @@ const Addblog = () => {
     if (location.state!= null) {
       axiosInstance
         .put(
-          "http://localhost:3000/blog/editblog/" + location.state.val._id,
+          `${import.meta.env.VITE_API_URL}/blog/editblog/` +
+            location.state.val._id,
           blogData
         )
         .then((res) => {
@@ -31,11 +32,11 @@ const Addblog = () => {
         });
     } else {
       axiosInstance
-        .post("http://localhost:3000/blog/addblog", blogData)
+        .post(`${import.meta.env.VITE_API_URL}/blog/addblog`, blogData)
         .then((res) => {
           alert("Blog added");
           // console.log(res)
-          navigate('/blogs');
+          navigate("/blogs");
           //home page url '/blogs' in app.jsx
         });
 

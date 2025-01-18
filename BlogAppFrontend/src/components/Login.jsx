@@ -15,24 +15,25 @@ const navigate = useNavigate();
   function capValue(){
     // console.log(form);
     // (give the backend port no: and backend url) redirection url - app.js/index.js)
-    axios.post("http://localhost:3000/users/login",form).then((res) => {
-      console.log(res)
-      alert(res.data.message);
-      // blogs is given in the route of app.jsx - frontend
-      //if token is with the data then it is save to the frontend
-      if(res.data.token){
-        sessionStorage.setItem('logintoken',res.data.token)
-        //if loken is generated it will navigate to blogs page 
-           navigate("/blogs");
-
-      }else{
-        //otherwise prohibited (stay there it self)
-        navigate('/');
-      }
-   
-    }).catch((error)=>{
-      alert('Invalid Login');
-    })
+    axios
+      .post(`${import.meta.env.VITE_API_URL}/users/login`, form)
+      .then((res) => {
+        console.log(res);
+        alert(res.data.message);
+        // blogs is given in the route of app.jsx - frontend
+        //if token is with the data then it is save to the frontend
+        if (res.data.token) {
+          sessionStorage.setItem("logintoken", res.data.token);
+          //if loken is generated it will navigate to blogs page
+          navigate("/blogs");
+        } else {
+          //otherwise prohibited (stay there it self)
+          navigate("/");
+        }
+      })
+      .catch((error) => {
+        alert("Invalid Login");
+      });
   }
 
 
