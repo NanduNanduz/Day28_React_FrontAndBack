@@ -8,7 +8,7 @@ const Signup = () => {
   return (
     <div style={{ margin: "8%", textAlign: "center" }}>
       <Typography variant="h3" style={{ color: "Brown" }}>
-        BlogApp Register
+        BlogApp Register 
       </Typography>
       <br />
       <Grid container spacing={2}>
